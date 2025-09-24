@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
+import { sendEmail } from "../utils/nodemailer.js";
 
 export const signup = async (req, res) => {
   const { email, password, name } = req.body;
@@ -26,10 +27,12 @@ export const signup = async (req, res) => {
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, //24hrs,
     });
+
     await newUser.save();
 
     // jwt
     generateTokenAndSetCookie(res, newUser._id);
+    sendEmail(newUser.email, newUser.verificationToken);
 
     res.status(201).json({
       success: true,
