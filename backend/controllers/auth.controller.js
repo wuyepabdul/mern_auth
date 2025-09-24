@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
 
     // jwt
     generateTokenAndSetCookie(res, newUser._id);
-    sendEmail(newUser.email, newUser.verificationToken);
+    sendEmail(newUser.email, newUser.verificationToken, name);
 
     res.status(201).json({
       success: true,
