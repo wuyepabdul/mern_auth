@@ -1,240 +1,514 @@
-export const welcomeTemplate = (name) => {
-  return `
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Welcome Email</title>
-    <style>
-      /* Base reset */
-      body { margin:0; padding:0; background:#f4f6f8; font-family: Arial, sans-serif; color:#333; }
-      table { border-collapse:collapse; }
-      a { text-decoration:none; }
+import { log } from "console";
 
-      /* Container */
-      .container { width:100%; max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
-      .inner { padding:24px; }
+export const welcomeTemplate = (user, linkUrl) => {
+  return `<!DOCTYPE html>
+<html>
 
-      /* Headings & text */
-      h1 { margin:0 0 16px 0; font-size:22px; color:#111; }
-      p { margin:0 0 16px 0; line-height:1.5; }
+<head>
+  <meta charset="utf-8">
+  <title>Welcome </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
 
-      /* Code box */
-      .code-box { display:block; width:100%; text-align:center; padding:16px; border-radius:8px; background:#111; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    .container {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-       /* Welcome Heading */
-      .welcome { display:block; width:100%; text-align:center; padding:16px; background:#0ea5a0; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    }
 
-      /* Button */
-      .btn { display:inline-block; background:#0ea5a0; color:#ffffff; padding:14px 28px; border-radius:6px; font-weight:bold; font-size:16px; }
+    .header {
+      background: #0c962a;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
 
-      /* Footer */
-      .footer { font-size:13px; color:#666; text-align:center; padding:20px; }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
 
-      /* Responsive adjustments */
-      @media only screen and (max-width:480px) {
-        .inner { padding:16px !important; }
-        h1 { font-size:18px !important; }
-        .code-box { font-size:22px !important; letter-spacing:4px !important; padding:12px !important; }
-        .welcome {  padding:12px !important;  font-size:22px !important; letter-spacing:4px !important; }
-        .btn { display:block !important; width:100% !important; text-align:center !important; padding:14px 0 !important; font-size:16px !important; }
+    .content {
+      padding: 10px 20px;
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .content h2 {
+      font-size: 18px;
+      margin-top: 0;
+      color: #333;
+    }
+
+    .code-box {
+      display: block;
+      /* width: 100%; */
+      text-align: center;
+      padding: 10px;
+      background: #111;
+      color: #fff;
+      font-size: 16px;
+      letter-spacing: 10px;
+      font-weight: 500;
+      margin: 0 auto;
+    }
+
+
+    .verify {
+      display: block;
+      width: 50%;
+      text-align: center;
+      margin: 0 auto;
+      padding: 12px 20px;
+      /* margin: 20px 0; */
+      background: #0c962a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+
+
+    .footer {
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      color: #666;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .content,
+      .header,
+      .footer {
+        padding: 15px;
       }
-    </style>
-  </head>
-  <body>
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-      <tr>
-        <td align="center" style="padding:20px 0;">
-          <table class="container" cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td class="inne">
-                <h1 class="welcome ">   Verification Successful </h1>
-                <p>Hi <strong>${name}</strong>,</p>
-                <p>Welcome to MERN Advanced Authentication. </p>
 
-                <p>We’re excited to have you on board! Your account has been created successfully, and you’re all set to.</p>
+      .verify {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
 
-                <p style="text-align:center;">
-                  <a href="localhost:3000/dashboard" class="btn" target="_blank" rel="noopener">Visit our home page </a>
-                </p>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Account Created Successfully</h1>
+    </div>
+    <div class="content">
+      <p>Hi <strong>${user.name}</strong>,</p>
 
-                <p>If the button doesn’t work, copy and paste this link into your browser:</p>
-                <p style="word-break:break-word;">
-                  <a href="localhost:3000/dashboard" style="color:#0ea5a0;">localhost:3000/dashboard</a>
-                </p>
-                  <p>Best Regards</p>
-                  <p>Your App Team</p>
-                <div class="footer">
+      <p>We’re excited to have you on board! Your account has been created successfully, and you’re all set to log in to
+        your account.</p>
 
-                  <p>This is an automated message, please do not reply to the email.</p>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-  </html>
-  `;
+
+      <p style="text-align:center;">
+        <a href='${linkUrl}' class="verify">Login</a>
+      </p>
+
+      <p>If the button doesn’t work, copy and paste this link into your browser:</p>
+      <p style="word-break:break-word;">
+        <a href="localhost:3000/dashboard" style="color:#0ea5a0;">localhost:3000/dashboard</a>
+      </p>
+
+      <p>If you didn’t sign up, please ignore this email.</p>
+      <p>Best Regards</p>
+      <p>Your App Team</p>
+
+    </div>
+
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} MERN-Auth. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+
+</html>`;
 };
 
-export const verificationTemplate = (name, verificationCode) => {
-  return `
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Verify your account</title>
-    <style>
-      /* Base reset */
-      body { margin:0; padding:0; background:#f4f6f8; font-family: Arial, sans-serif; color:#333; }
-      table { border-collapse:collapse; }
-      a { text-decoration:none; }
+export const verificationTemplate = (user, linkUrl) => {
+  return `<!DOCTYPE html>
+<html>
 
-      /* Container */
-      .container { width:100%; max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
-      .inner { padding:24px; }
+<head>
+  <meta charset="utf-8">
+  <title>Account Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
 
-      /* Headings & text */
-      h1 { margin:0 0 16px 0; font-size:22px; color:#111; }
-      p { margin:0 0 16px 0; line-height:1.5; }
+    .container {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-      /* Code box */
-      .code-box { display:block; width:100%; text-align:center; padding:16px; border-radius:8px; background:#111; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    }
 
-       /* Welcome Heading */
-      .welcome { display:block; width:100%; text-align:center; padding:16px; background:#0ea5a0; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    .header {
+      background: #0c962a;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
 
-      /* Button */
-      .btn { display:inline-block; background:#0ea5a0; color:#ffffff; padding:14px 28px; border-radius:6px; font-weight:bold; font-size:16px; }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
 
-      /* Footer */
-      .footer { font-size:13px; color:#666; text-align:center; padding:20px; }
+    .content {
+      padding: 10px 20px;
+      text-align: left;
+      line-height: 1.6;
+    }
 
-      /* Responsive adjustments */
-      @media only screen and (max-width:480px) {
-        .inner { padding:16px !important; }
-        h1 { font-size:18px !important; }
-        .code-box { font-size:22px !important; letter-spacing:4px !important; padding:12px !important; }
-        .welcome {  padding:12px !important;  font-size:22px !important; letter-spacing:4px !important; }
-        .btn { display:block !important; width:100% !important; text-align:center !important; padding:14px 0 !important; font-size:16px !important; }
+    .content h2 {
+      font-size: 18px;
+      margin-top: 0;
+      color: #333;
+    }
+
+    .code-box {
+      display: block;
+      /* width: 100%; */
+      text-align: center;
+      padding: 10px;
+      background: #111;
+      color: #fff;
+      font-size: 16px;
+      letter-spacing: 10px;
+      font-weight: 500;
+      margin: 0 auto;
+    }
+
+
+    .verify {
+      display: block;
+      width: 50%;
+      text-align: center;
+      margin: 0 auto;
+      padding: 12px 20px;
+      background: #0c962a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+
+
+    .footer {
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      color: #666;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .content,
+      .header,
+      .footer {
+        padding: 15px;
       }
-    </style>
-  </head>
-  <body>
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-      <tr>
-        <td align="center" style="padding:20px 0;">
-          <table class="container" cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td class="inner">
-                <h1 class="welcome ">   Email Verification </h1>
-                <p>Hi <strong>${name}</strong>,</p>
-                <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>'{expiry}' minutes</strong>.</p>
 
-                <div class="code-box">${verificationCode}</div>
+      .verify {
+        display: block;
+        width: 100%;
+        text-align: center;
+        
+      }
+    }
+  </style>
+</head>
 
-                <p style="text-align:center;">
-                  <a href="{verify_link}" class="btn" target="_blank" rel="noopener">Verify My Account</a>
-                </p>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Account Verification</h1>
+    </div>
+    <div class="content">
 
-                <p>If the button doesn’t work, copy and paste this link into your browser:</p>
-                <p style="word-break:break-word;">
-                  <a href="{verify_link}" style="color:#0ea5a0;">{verify_link}</a>
-                </p>
+      <p>Hi <strong>${user.name}</strong>,</p>
+      <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>30 minutes</strong>.</p>
 
-                  <p>If you didn’t sign up, please ignore this email.</p>
-                  <p>Best Regards</p>
-                  <p>Your App Team</p>
-                <div class="footer">
+      <p style="text-align:center;">
+      <div class="code-box">${user.verificationToken}</div>
+      </p>
 
-                  <p>This is an automated message, please do not reply to the email.</p>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-  </html>
-  `;
+      <p style="text-align:center;">
+        <a href="${linkUrl}" class="verify">Verify My Account</a>
+      </p>
+
+
+      <p>If the button doesn’t work, copy and paste this link into your browser:</p>
+      <p style="word-break:break-word;">
+        <a href="${linkUrl}" style="color:#0ea5a0;">${linkUrl}</a>
+      </p>
+
+      <p>If you didn’t sign up, please ignore this email.</p>
+      <p>Best Regards</p>
+      <p>Your App Team</p>
+
+    </div>
+
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} MERN-Auth. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+
+</html>`;
 };
 
-export const passwordResetTemplate = (name, verificationCode) => {
+export const passwordResetTemplate = (user, linkUrl) => {
   return `
-  <!doctype html>
-  <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Reset your password</title>
-    <style>
-      body { margin:0; padding:0; background:#f4f6f8; font-family: Arial, sans-serif; color:#333; }
-      table { border-collapse:collapse; }
-      a { text-decoration:none; }
+  <!DOCTYPE html>
+<html>
 
-      .container { width:100%; max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08); }
-      .inner { padding:24px; }
+<head>
+  <meta charset="utf-8">
+  <title>Password Reset Request</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
 
-      h1 { margin:0 0 16px 0; font-size:22px; color:#111; }
-      p { margin:0 0 16px 0; line-height:1.5; }
+    .container {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-      .code-box { display:block; width:100%; text-align:center; padding:16px; border-radius:8px; background:#111; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    }
 
-        /* Welcome Heading */
-      .welcome { display:block; width:100%; text-align:center; padding:16px; border-radius:8px; background:#0ea5a0; color:#fff; font-size:28px; letter-spacing:6px; font-weight:700; margin:20px 0; }
+    .header {
+      background: #0c962a;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
 
-      .btn { display:inline-block; background:#0ea5a0; color:#ffffff; padding:14px 28px; border-radius:6px; font-weight:bold; font-size:16px; }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
 
-      .footer { font-size:13px; color:#666; text-align:center; padding:20px; }
+    .content {
+      padding: 20px;
+      text-align: left;
+      line-height: 1.6;
+    }
 
-      @media only screen and (max-width:480px) {
-        .inner { padding:16px !important; }
-        h1 { font-size:18px !important; }
-        .code-box { font-size:22px !important; letter-spacing:4px !important; padding:12px !important; }
-          /* Welcome Heading */
-        .welcome {  padding:12px !important;  font-size:22px !important; letter-spacing:4px !important; }
-        .btn { display:block !important; width:100% !important; text-align:center !important; padding:14px 0 !important; font-size:16px !important; }
+    .content h2 {
+      font-size: 18px;
+      margin-top: 0;
+      color: #333;
+    }
+
+    .button {
+      display: block;
+      width: 50%;
+      text-align: center;
+      margin: 0 auto;
+      padding: 12px 20px;
+      /* margin: 20px 0; */
+      background: #0c962a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .footer {
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      color: #666;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .content,
+      .header,
+      .footer {
+        padding: 15px;
       }
-    </style>
-  </head>
-  <body>
-    <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-      <tr>
-        <td align="center" style="padding:20px 0;">
-          <table class="container" cellpadding="0" cellspacing="0" role="presentation">
-            <tr>
-              <td class="inner">
-                <h1 class="Welcome">Password Reset Request</h1>
-                <p>Hi <strong>${name}</strong>,</p>
-                <p>We received a request to reset your password. Use the code below to reset it. This code will expire in <strong>${30} minutes</strong>.</p>
 
-                <div class="code-box">${verificationCode}</div>
+      .button {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
 
-                <p style="text-align:center;">
-                  <a href="{reset_link}" class="btn" target="_blank" rel="noopener">Reset My Password</a>
-                </p>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Password Reset Request</h1>
+    </div>
+    <div class="content">
+      <p>Hi <strong>${user.name}</strong>,</p>
+      <p>We received a request to reset your password. Use the code below to reset it. This code will expire in
+        <strong>${30} minutes</strong>.
+      </p>
 
-                <p>If the button doesn’t work, copy and paste this link into your browser:</p>
-                <p style="word-break:break-word;">
-                  <a href="{reset_link}" style="color:#0ea5a0;">{reset_link}</a>
-                </p>
+      <p style="text-align:center;">
+        <a href="${linkUrl}" class="button">Reset My Password</a>
+      </p>
 
-                <div class="footer">
-                  <p>If you didn’t request a password reset, you can safely ignore this email or contact <a href="mailto:{support_email}" style="color:#0ea5a0;">{support_email}</a>.</p>
-                  <p>© ${new Date().getFullYear()} YourApp. All rights reserved.</p>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-  </html>
+      <p>If the button doesn’t work, copy and paste this link into your browser:</p>
+      <p style="word-break:break-word;">
+        <a href="${linkUrl}" style="color:#0ea5a0;">${linkUrl}</a>
+      </p>
+
+      <p>If you didn’t request a password reset, you can ignore this email </p>
+    </div>
+
+    <div class="footer">
+      <p>© ${new Date().getFullYear()} MERN-Auth. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+
+  </html>`;
+};
+
+export const passwordResetSuccessfulTemplate = (user, linkUrl) => {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Password Reset Successful</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: 10px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      
+    }
+    .header {
+      background: #0c962a;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .content {
+      padding: 20px;
+      text-align: left;
+      line-height: 1.6;
+    }
+    .content h2 {
+      font-size: 18px;
+      margin-top: 0;
+      color: #333;
+    }
+    .button {
+      display: block;
+      width: 50%;
+      text-align: center;
+      margin:0 auto;
+      padding: 12px 20px;
+      /* margin: 20px 0; */
+      background: #0c962a;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .footer {
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+      background: #f1f1f1;
+      color: #666;
+    }
+    @media screen and (max-width: 600px) {
+      .content, .header, .footer {
+        padding: 15px;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Password Reset Successful</h1>
+    </div>
+    <div class="content">
+      <h2>Hello ${user.name},</h2>
+      <p>Your password has been successfully reset. You can now log in to your account using your new password.</p>
+      <p>If you did not perform this action, please secure your account immediately by contacting our support team.</p>
+      <a href="${linkUrl}" class="button">Login Now</a>
+      <p>Thank you,<br> The Support Team</p>
+    </div>
+    <div class="footer">
+      <p>&copy; ${new Date().getFullYear()} Your Company. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
+
   `;
 };

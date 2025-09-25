@@ -1,16 +1,12 @@
 import nodemailer from "nodemailer";
 import {
+  passwordResetSuccessfulTemplate,
   passwordResetTemplate,
   verificationTemplate,
   welcomeTemplate,
 } from "./emailTemplates.js";
 
-export const sendEmail = (
-  receiverEmail,
-  verificationCode,
-  name,
-  emailTemplate
-) => {
+export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -22,18 +18,21 @@ export const sendEmail = (
     },
   });
 
+  console.log("clientUrl", clientUrl);
   const mailOptions = {
-    from: `"Duls TECH" <no-reply@mern-advance-auth.com>`,
-    to: receiverEmail,
-    subject: " Account Verification",
-    text: `MERN Auth Email`, // plain‑text body
+    from: `no-reply `,
+    to: receiver.email,
+    subject: emailSubject,
+    // text: `MERN Auth Email`, // plain‑text body
     // html: welcomeTemplate(name, verificationCode), // HTML body
     html:
       emailTemplate === "welcome"
-        ? welcomeTemplate(name)
+        ? welcomeTemplate(receiver, clientUrl)
         : emailTemplate === "verify"
-        ? verificationTemplate(name, verificationCode)
-        : passwordResetTemplate(name),
+        ? verificationTemplate(receiver, clientUrl)
+        : emailTemplate === "reset"
+        ? passwordResetTemplate(receiver, clientUrl)
+        : passwordResetSuccessfulTemplate(receiver, clientUrl),
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
