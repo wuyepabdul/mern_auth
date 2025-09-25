@@ -70,12 +70,14 @@ export const verifyEmail = async (req, res) => {
       user.verificationTokenExpiresAt = undefined;
       await user.save();
       sendEmail(user.email, user.name, "", "welcome");
-      return res
-        .status(200)
-        .json({ success: true, message: "Account Verified Successfully" });
+      return res.status(200).json({
+        success: true,
+        message: "Account Verified Successfully",
+        user: { ...user._doc, password: undefined },
+      });
     }
   } catch (error) {
-    console.log("server error", error.message);
+    console.log("server error in verifying email", error.message);
     return res
       .status(500)
       .json({ success: false, message: "Server Error, try again later" });
@@ -87,5 +89,8 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.send("logout route");
+  res.clearCookie("token");
+  return res
+    .status(200)
+    .json({ success: true, message: "Logged out successfully" });
 };
