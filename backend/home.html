@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Password Reset Successful</title>
+  <title>Account Verification</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -51,7 +51,6 @@
 
     .code-box {
       display: block;
-      /* width: 100%; */
       text-align: center;
       padding: 10px;
       background: #111;
@@ -69,7 +68,6 @@
       text-align: center;
       margin: 0 auto;
       padding: 12px 20px;
-      /* margin: 20px 0; */
       background: #0c962a;
       color: white;
       text-decoration: none;
@@ -99,6 +97,7 @@
         display: block;
         width: 100%;
         text-align: center;
+
       }
     }
   </style>
@@ -107,22 +106,26 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Verification Successful</h1>
+      <h1>Account Verification</h1>
     </div>
     <div class="content">
-      <p>Hi <strong>${name}</strong>,</p>
 
-      <p>We’re excited to have you on board! Your account has been created successfully, and you’re all set to log in to
-        your account.</p>
-
+      <p>Hi <strong>${user.name}</strong>,</p>
+      <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>30
+          minutes</strong>.</p>
 
       <p style="text-align:center;">
-        <a href=`${resetLink}` class="verify">Login</a>
+      <div class="code-box">${user.verificationToken}</div>
       </p>
+
+      <p style="text-align:center;">
+        <a href="${linkUrl}" class="verify">Verify My Account</a>
+      </p>
+
 
       <p>If the button doesn’t work, copy and paste this link into your browser:</p>
       <p style="word-break:break-word;">
-        <a href="localhost:3000/dashboard" style="color:#0ea5a0;">localhost:3000/dashboard</a>
+        <a href="${linkUrl}" style="color:#0ea5a0;">${linkUrl}</a>
       </p>
 
       <p>If you didn’t sign up, please ignore this email.</p>

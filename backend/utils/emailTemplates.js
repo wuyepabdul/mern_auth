@@ -80,6 +80,10 @@ export const welcomeTemplate = (user, linkUrl) => {
       font-weight: bold;
     }
 
+    .verify a{
+      color:white;
+    }
+
 
 
     .footer {
@@ -222,6 +226,9 @@ export const verificationTemplate = (user, linkUrl) => {
       font-weight: bold;
     }
 
+      .verify a{
+                color: white;
+      }
 
 
     .footer {
@@ -258,7 +265,8 @@ export const verificationTemplate = (user, linkUrl) => {
     <div class="content">
 
       <p>Hi <strong>${user.name}</strong>,</p>
-      <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>30 minutes</strong>.</p>
+      <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>30
+          minutes</strong>.</p>
 
       <p style="text-align:center;">
       <div class="code-box">${user.verificationToken}</div>
