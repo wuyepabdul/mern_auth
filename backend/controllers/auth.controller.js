@@ -143,14 +143,18 @@ export const forgotPassword = async (req, res) => {
 
     // generate reset token
     const resetToken = crypto.randomBytes(20).toString("hex");
-    const resetTokenExpiresAt = Date.now() + 1 * 60 * 60 * 1000;
+    const resetTokenExpiresAt = Date.now() + 0.5 * 60 * 60 * 1000;
 
     user.resetPasswordToken = resetToken;
     user.resetPasswordExpiresAt = resetTokenExpiresAt;
     await user.save();
 
-    await user.sendEmail(user, "reset", "Reset Password", clientUrl);
-    // `${process.env.CLIENT_URL}/resetPassword/${resetToken}`
+    sendEmail(
+      user,
+      "reset",
+      "Reset Password",
+      `${clientUrl}/resetPassword/${resetToken}`
+    );
 
     return res.status(200).json({
       success: true,
@@ -158,6 +162,48 @@ export const forgotPassword = async (req, res) => {
     });
   } catch (error) {
     console.log("server error in forgot password", error.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Server Error, try again later" });
+  }
+};
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpiresAt: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid or expired reset token" });
+    }
+
+    // update password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpiresAt = undefined;
+    await user.save();
+
+    sendEmail(
+      user,
+      "resetSuccess",
+      "Password Reset Successful",
+      `${clientUrl}/login`
+    );
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Password Reset Successful" });
+      
+  } catch (error) {
+    console.log("server error in reset password", error.message);
     return res
       .status(500)
       .json({ success: false, message: "Server Error, try again later" });

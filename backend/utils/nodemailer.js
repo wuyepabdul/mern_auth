@@ -18,13 +18,11 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
     },
   });
 
-  console.log("clientUrl", clientUrl);
   const mailOptions = {
-    from: `no-reply `,
+    from: "no-reply",
     to: receiver.email,
     subject: emailSubject,
-    // text: `MERN Auth Email`, // plain‑text body
-    // html: welcomeTemplate(name, verificationCode), // HTML body
+    text: emailSubject, // plain‑text body
     html:
       emailTemplate === "welcome"
         ? welcomeTemplate(receiver, clientUrl)
