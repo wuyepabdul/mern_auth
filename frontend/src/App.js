@@ -1,5 +1,9 @@
 function App() {
-  return <h1 className="text-red-500 text-5xl">Hello World</h1>;
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-green-300 to-emerald-500 justify-center relative overflow-hidden">
+      
+    </div>
+  );
 }
 
 export default App;
