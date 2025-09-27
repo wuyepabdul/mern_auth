@@ -33,13 +33,15 @@ const RedirectAuthenticatedUser = ({ children }) => {
 };
 
 function App() {
-  const { checkAuth, isAuthenticated, user } = useAuthStore();
+  const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+  if (isCheckingAuth) return <LoadingSpinner />
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
   console.log("isAuthenticated", isAuthenticated);
   console.log("user", user);
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-green-900 via-green-400 to-green-900 flex items-center justify-center relative overflow-hidden">
       <Routes>
