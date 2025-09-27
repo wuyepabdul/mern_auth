@@ -2,14 +2,24 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "../components/Input";
 import { Lock, Mail, Loader } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+
+  const { isLoading, login, error } = useAuthStore();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
+    try {
+      await login(email, password);
+      navigate("/");
+    } catch (error) {
+      console.log("error logging in", error);
+    }
   };
   return (
     <motion.div
@@ -46,7 +56,7 @@ export const LoginPage = () => {
               Forgot Password?
             </Link>
           </div>
-
+          {error && <p className="text-red-500 font-semibold mb-4">{error}</p>}
           <motion.button
             className=" w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition duration-200"
             whileHover={{ scale: 1.02 }}
