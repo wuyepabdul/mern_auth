@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.use(
   cors({
     origin: [
-      `${process.env.CLIENT_URL_PRODUCTION}`,
+      `https://mern-auth-frontend-rho.vercel.app`,
       `${process.env.CLIENT_URL}`,
     ],
     methods: ["POST", "GET"],
