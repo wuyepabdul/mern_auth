@@ -12,7 +12,7 @@ const port = process.env.PORT || 5000;
 const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
-  res.send("API");
+  res.send("Welcome to MERN Advanced Auth API");
 });
 
 app.use(
@@ -21,6 +21,7 @@ app.use(
       `${process.env.CLIENT_URL_PRODUCTION}`,
       `${process.env.CLIENT_URL}`,
     ],
+    methods: ["POST", "GET"],
     credentials: true,
   })
 );
