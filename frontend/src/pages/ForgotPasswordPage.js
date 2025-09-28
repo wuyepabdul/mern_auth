@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "../components/Input";
-import { Lock, Mail, Loader, ArrowLeft } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Mail, Loader, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 export const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
   const [isSubmited, setIsSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   const { isLoading, forgotPassword, error } = useAuthStore();
 
@@ -16,7 +15,7 @@ export const ForgotPasswordPage = () => {
     e.preventDefault();
     try {
       await forgotPassword(email);
-      navigate("/");
+      setIsSubmitted(true);
     } catch (error) {
       console.log("error logging in", error);
     }
@@ -73,18 +72,20 @@ export const ForgotPasswordPage = () => {
             </motion.button>
           </form>
         ) : (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-            className="size-16 bg-green-500 rounded-full flex-center justify-center mx-auto mb-4"
-          >
-            <Mail className="size-8 text-white" />
+          <div className="text-center">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <Mail className="size-8 text-white" />
+            </motion.div>
             <p className="text-gray-300 mb-6">
               If an account exist for {email}, you will receive a password reset
               link shortly
             </p>
-          </motion.div>
+          </div>
         )}
       </div>
       <div className="px-8 py-4 bg-gray-900 bg-opacity-50 flex justify-center">

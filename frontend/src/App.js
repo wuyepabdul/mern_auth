@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import DashboardPage from "./pages/DashboardPage";
 import { LoadingSpinner } from "./components/LoadingSpinner";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 // protect routes that require authentication
 const ProtectedRoute = ({ children }) => {
@@ -81,6 +82,14 @@ function App() {
           element={
             <RedirectAuthenticatedUser>
               <ForgotPasswordPage />
+            </RedirectAuthenticatedUser>
+          }
+        />
+        <Route
+          path="/reset-password/:token"
+          element={
+            <RedirectAuthenticatedUser>
+              <ResetPasswordPage />
             </RedirectAuthenticatedUser>
           }
         />
