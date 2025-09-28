@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import path from "path";
 
 export const generateTokenAndSetCookie = (res, userId) => {
   const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
@@ -8,7 +9,8 @@ export const generateTokenAndSetCookie = (res, userId) => {
   res.cookie("token", token, {
     httpOnly: true, //prevents XSS attacks & cookie cannot be accessed by client side javascript
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict", // prevents csrf attacks
+    sameSite: "lax", // prevents csrf attacks
+    path: "/",
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
 
