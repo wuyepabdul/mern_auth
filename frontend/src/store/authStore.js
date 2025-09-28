@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
 
-// const API_URL = "http://localhost:5000/api/auth";
-const API_URL = import.meta.env.REACT_APP_BACKEND_BASE_URL;
+const API_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 axios.defaults.withCredentials = true; //axios puts the cookies in the request headers for every request
 

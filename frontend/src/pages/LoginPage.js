@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { Lock, Mail, Loader } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
+import toast from "react-hot-toast";
 
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +19,7 @@ export const LoginPage = () => {
       await login(email, password);
       navigate("/");
     } catch (error) {
-      console.log("error logging in", error);
+      toast.error("error logging in:", error);
     }
   };
   return (

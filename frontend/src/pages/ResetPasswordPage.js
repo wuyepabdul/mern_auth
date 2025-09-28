@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "../components/Input";
 import { Lock, Loader } from "lucide-react";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import toast from "react-hot-toast";
 
@@ -30,7 +30,6 @@ export const ResetPasswordPage = () => {
         navigate("/login");
       }, 2000);
     } catch (error) {
-      console.log("error resetting password", error);
       toast.error(error.message || "Error resetting password");
     }
   };

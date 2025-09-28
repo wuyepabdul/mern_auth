@@ -49,7 +49,7 @@ export const EmailVerificationPage = () => {
       navigate("/");
       toast.success("Email Verified Successfully");
     } catch (error) {
-      console.log("error verifying email", error.message);
+      toast.error(error.message);
     }
   };
 
@@ -88,7 +88,7 @@ export const EmailVerificationPage = () => {
               />
             ))}
           </div>
-            {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
+          {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
