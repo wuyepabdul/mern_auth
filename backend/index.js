@@ -15,7 +15,15 @@ app.get("/", (req, res) => {
   res.send("API");
 });
 
-app.use(cors({ origin: `${process.env.CLIENT_URL}`, credentials: true }));
+app.use(
+  cors({
+    origin: [
+      `${process.env.CLIENT_URL_PRODUCTION}`,
+      `${process.env.CLIENT_URL}`,
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
