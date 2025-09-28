@@ -1,5 +1,3 @@
-import { log } from "console";
-
 export const welcomeTemplate = (user, linkUrl) => {
   return `<!DOCTYPE html>
 <html>
@@ -80,8 +78,8 @@ export const welcomeTemplate = (user, linkUrl) => {
       font-weight: bold;
     }
 
-    .verify a{
-      color:white;
+    .verify {
+      color:white !important;
     }
 
 
@@ -226,8 +224,9 @@ export const verificationTemplate = (user, linkUrl) => {
       font-weight: bold;
     }
 
-      .verify a{
-                color: white;
+      .verify{
+          color: white !important;
+          font-size:15px;
       }
 
 
@@ -268,9 +267,7 @@ export const verificationTemplate = (user, linkUrl) => {
       <p>Thanks for registering. Use the code below to verify your account. This code expires in <strong>30
           minutes</strong>.</p>
 
-      <p style="text-align:center;">
       <div class="code-box">${user.verificationToken}</div>
-      </p>
 
       <p style="text-align:center;">
         <a href="${linkUrl}" class="verify">Verify My Account</a>
@@ -350,13 +347,17 @@ export const passwordResetTemplate = (user, linkUrl) => {
       color: #333;
     }
 
+     .verify{
+          color: white !important;
+          font-size:15px;
+      }
+
     .button {
       display: block;
       width: 50%;
       text-align: center;
       margin: 0 auto;
       padding: 12px 20px;
-      /* margin: 20px 0; */
       background: #0c962a;
       color: white;
       text-decoration: none;

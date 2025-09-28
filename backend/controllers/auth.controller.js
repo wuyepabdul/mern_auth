@@ -37,7 +37,6 @@ export const signup = async (req, res) => {
 
     // jwt
     generateTokenAndSetCookie(res, newUser._id);
-    // sendEmail(newUser.email, newUser.verificationToken, newUser.name, "verify");
     sendEmail(newUser, "verify", "Verify Account", clientUrl);
 
     res.status(201).json({
@@ -71,7 +70,6 @@ export const verifyEmail = async (req, res) => {
       user.verificationToken = undefined;
       user.verificationTokenExpiresAt = undefined;
       await user.save();
-      // sendEmail(user.email, user.name, "", "welcome");
       sendEmail(user, "welcome", "Verification Successfull", clientUrl);
       return res.status(200).json({
         success: true,
@@ -153,7 +151,7 @@ export const forgotPassword = async (req, res) => {
       user,
       "reset",
       "Reset Password",
-      `${clientUrl}/resetPassword/${resetToken}`
+      `${clientUrl}/reset-password/${resetToken}`
     );
 
     return res.status(200).json({
