@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
@@ -40,25 +40,40 @@ export const EmailVerificationPage = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  /*  const handleSubmita = async (e) => {
     e.preventDefault();
-    const verificationCode = code.join("");
-
     try {
+      const verificationCode = code.join("");
       await verifyEmail(verificationCode);
       navigate("/");
       toast.success("Email Verified Successfully");
     } catch (error) {
-      toast.error(error.message);
+      console.log("error", error.message);
     }
-  };
+  }; */
+
+  const handleSubmit = useCallback(
+    async (e) => {
+      // ... handleSubmit logic
+      e.preventDefault();
+      try {
+        const verificationCode = code.join("");
+        await verifyEmail(verificationCode);
+        navigate("/");
+        toast.success("Email Verified Successfully");
+      } catch (error) {
+        console.log("error", error.message);
+      }
+    },
+    [code, navigate, verifyEmail]
+  );
 
   //   auto submit when all fields are filled
   useEffect(() => {
     if (code.every((digit) => digit !== "")) {
       handleSubmit(new Event("submit"));
     }
-  }, [code]);
+  }, [code, handleSubmit]);
   return (
     <div className="max-w-md mx-4 w-full bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden">
       <motion.div

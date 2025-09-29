@@ -5,7 +5,6 @@ import { Loader, Lock, Mail, User } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordStrengthMeter from "../components/PasswordStrengthMeter";
 import { useAuthStore } from "../store/authStore";
-import toast from "react-hot-toast";
 
 export const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -21,7 +20,7 @@ export const SignUpPage = () => {
       await signup(email, password, name);
       navigate("/verify-email");
     } catch (error) {
-      toast.error(error);
+      console.log("error", error.message);
     }
   };
   return (

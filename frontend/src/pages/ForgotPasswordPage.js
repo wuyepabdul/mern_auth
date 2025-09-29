@@ -4,7 +4,6 @@ import Input from "../components/Input";
 import { Mail, Loader, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
-import toast from "react-hot-toast";
 
 export const ForgotPasswordPage = () => {
   const [email, setEmail] = useState("");
@@ -18,7 +17,7 @@ export const ForgotPasswordPage = () => {
       await forgotPassword(email);
       setIsSubmitted(true);
     } catch (error) {
-      toast.error("error logging in:", error);
+      console.log("error", error.message);
     }
   };
   return (
