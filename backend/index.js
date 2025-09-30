@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
 
 const corsConfig = {
   origin: `${process.env.CLIENT_URL_PRODUCTION}`,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 app.use(cors(corsConfig));
