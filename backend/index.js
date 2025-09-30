@@ -18,13 +18,14 @@ app.get("/", (req, res) => {
 app.use(
   cors({
     origin: [
-      `https://mern-auth-frontend-rho.vercel.app`,
+      `${process.env.CLIENT_URL_PRODUCTION}`,
       `${process.env.CLIENT_URL}`,
     ],
-    methods: ["POST", "GET"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+app.options("*", cors()); // allow preflight for all routes
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
