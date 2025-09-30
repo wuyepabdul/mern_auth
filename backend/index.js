@@ -4,41 +4,40 @@ import dotenv from "dotenv";
 import authRoutes from "../backend/routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import path from "path";
+// import path from "path";
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 app.get("/", (req, res) => {
   res.send("Welcome to MERN Advanced Auth API");
 });
 
-app.use(
-  cors({
-    origin: [
-      `${process.env.CLIENT_URL_PRODUCTION}`,
-      `${process.env.CLIENT_URL}`,
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-  })
-);
-app.options(/.*/, cors());
+const corsConfig = {
+  origin: [`${process.env.CLIENT_URL_PRODUCTION}`, `${process.env.CLIENT_URL}`],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+
+app.options("", cors(corsConfig));
+// app.options(/.*/, cors(corsConfig));
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
 
 app.use("/api/auth", authRoutes);
 
-if (process.env.NODE_ENV === "production") {
+/* if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
   });
-}
+} */
 
 if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
