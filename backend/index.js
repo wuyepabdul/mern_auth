@@ -16,14 +16,14 @@ app.get("/", (req, res) => {
 });
 
 const corsConfig = {
-  origin: [`${process.env.CLIENT_URL_PRODUCTION}`, `${process.env.CLIENT_URL}`],
+  origin: `${process.env.CLIENT_URL_PRODUCTION}`,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 };
 
 app.use(cors(corsConfig));
 
-app.options("", cors(corsConfig));
+app.options(/.*/, cors(corsConfig));
 // app.options(/.*/, cors(corsConfig));
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
@@ -39,11 +39,14 @@ app.use("/api/auth", authRoutes);
   });
 } */
 
-if (process.env.NODE_ENV !== "production") {
+/* if (process.env.NODE_ENV !== "production") {
   app.listen(port, () => {
     connectDb();
     console.log(`Server running on port ${port}`);
   });
-}
-
-export default app;
+} */
+app.listen(port, () => {
+  connectDb();
+  console.log(`Server running on port ${port}`);
+});
+// export default app;
