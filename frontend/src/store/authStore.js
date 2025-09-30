@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import axios from "axios";
 
-// const API_URL = process.env.REACT_APP_BACKEND_BASE_URL_LIVE;
-const API_URL = "https://mern-auth-backend-kappa.vercel.app";
+const API_URL = process.env.REACT_APP_BACKEND_BASE_URL_LIVE;
+// const API_URL = "https://mern-auth-backend-kappa.vercel.app";
 
 axios.defaults.withCredentials = true; //axios puts the cookies in the request headers for every request
 
