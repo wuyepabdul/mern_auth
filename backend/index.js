@@ -25,7 +25,7 @@ app.use(
     credentials: true,
   })
 );
-app.options("*", cors()); // allow preflight for all routes
+
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
