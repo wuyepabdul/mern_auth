@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import axios from "axios";
-
-const API_URL = `${process.env.REACT_APP_BACKEND_BASE_URL}/api/auth`;
+//https://mern-auth-beta-liard.vercel.app
+//const API_URL = `${process.env.REACT_APP_BACKEND_BASE_URL}/api/auth`;
+const API_URL = `https://mern-auth-api-self.vercel.app/api/auth`;
+//https://mern-auth-api-self.vercel.app/
 
 axios.defaults.withCredentials = true; //axios puts the cookies in the request headers for every request
 
@@ -16,15 +18,11 @@ export const useAuthStore = create((set) => ({
   signup: async (email, password, name) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/signup`,
-        {
-          email,
-          password,
-          name,
-        },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${API_URL}/signup`, {
+        email,
+        password,
+        name,
+      });
       set({
         user: response.data.user,
         isAuthenticated: true,
@@ -41,14 +39,10 @@ export const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/login`,
-        {
-          email,
-          password,
-        },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${API_URL}/login`, {
+        email,
+        password,
+      });
       set({
         isAuthenticated: true,
         user: response.data.user,
@@ -67,15 +61,12 @@ export const useAuthStore = create((set) => ({
     set({ isLoading: true, error: null });
     try {
       await axios.post(`${API_URL}/logout`);
-      set(
-        {
-          user: null,
-          isAuthenticated: false,
-          error: null,
-          isLoading: false,
-        },
-        { withCredentials: true }
-      );
+      set({
+        user: null,
+        isAuthenticated: false,
+        error: null,
+        isLoading: false,
+      });
     } catch (error) {
       set({ error: "Error logging out", isLoading: false });
       throw error;
@@ -84,11 +75,7 @@ export const useAuthStore = create((set) => ({
   verifyEmail: async (code) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/verify-email`,
-        { code },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${API_URL}/verify-email`, { code });
       set({
         user: response.data.user,
         isAuthenticated: true,
@@ -123,13 +110,9 @@ export const useAuthStore = create((set) => ({
   forgotPassword: async (email) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/forgot-password`,
-        {
-          email,
-        },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${API_URL}/forgot-password`, {
+        email,
+      });
       set({ message: response.data.message, isLoading: false });
     } catch (error) {
       set({
@@ -144,13 +127,9 @@ export const useAuthStore = create((set) => ({
   resetPassword: async (token, password) => {
     set({ isLoading: true, error: null });
     try {
-      const response = await axios.post(
-        `${API_URL}/reset-password/${token}`,
-        {
-          password,
-        },
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${API_URL}/reset-password/${token}`, {
+        password,
+      });
       set({ message: response.data.message, isLoading: false });
     } catch (error) {
       set({
