@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 // };
 
 // app.use(cors(corsConfig));
+app.use(cors());
 app.use(corsMiddleware);
 // app.options("", cors(corsConfig));
 
