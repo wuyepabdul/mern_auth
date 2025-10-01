@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.send("Welcome to MERN Advanced Auth API at : ", process.env.CLIENT_URL);
+  res.send(`Welcome to MERN Advanced Auth API at :  ${process.env.CLIENT_URL}`);
 });
 
 const corsConfig = {
