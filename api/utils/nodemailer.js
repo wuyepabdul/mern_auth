@@ -6,12 +6,15 @@ import {
   welcomeTemplate,
 } from "./emailTemplates.js";
 
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
     host: "smtp.gmail.com",
-    secure: false,
-    port: 587,
+    secure: true,
+    port: 465,
     auth: {
       user: process.env.NODEMAILER_EMAIL,
       pass: process.env.NODEMAILER_PASSWORD,
@@ -19,7 +22,7 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   });
 
   const mailOptions = {
-    from: '"MERN-AUTH" <dulstech@egmail.com>',
+    from: `"MERN-AUTH"  <${process.env.NODEMAILER_EMAIL}>`,
     to: receiver.email,
     subject: emailSubject,
     text: emailSubject, // plain‑text body
@@ -41,4 +44,3 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
     }
   });
 };
-// tolu eibm pdkw nmei
