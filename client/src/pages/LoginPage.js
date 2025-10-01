@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Input from "../components/Input";
 import { Lock, Mail, Loader } from "lucide-react";
