@@ -1,9 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
-//https://mern-auth-beta-liard.vercel.app
-//const API_URL = `${process.env.REACT_APP_BACKEND_BASE_URL}/api/auth`;
-const API_URL = `https://mern-auth-api-self.vercel.app/api/auth`;
-//https://mern-auth-api-self.vercel.app/
+
+const API_URL = `${process.env.REACT_APP_BACKEND_BASE_URL}/api/auth`;
 
 axios.defaults.withCredentials = true; //axios puts the cookies in the request headers for every request
 
