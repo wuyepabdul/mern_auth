@@ -41,6 +41,7 @@ export const SignUpPage = () => {
             placeholder="Full Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
           <Input
             icon={Mail}
@@ -48,6 +49,7 @@ export const SignUpPage = () => {
             placeholder="Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <Input
             icon={Lock}
@@ -55,6 +57,7 @@ export const SignUpPage = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
           {error && <p className="text-red-500 font-semibold mt-2">{error}</p>}

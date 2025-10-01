@@ -53,6 +53,7 @@ export const ResetPasswordPage = () => {
             placeholder="New Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <Input
             icon={Lock}
@@ -60,6 +61,7 @@ export const ResetPasswordPage = () => {
             placeholder="Confirm Password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            required
           />
 
           <motion.button
