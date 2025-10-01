@@ -3,6 +3,7 @@ export const corsMiddleware = (req, res, next) => {
     process.env.NODE_ENV === "production"
       ? process.env.CLIENT_URL_PRODUCTION
       : process.env.CLIENT_URL_LOCAL;
+
   const origin = req.headers.origin;
 
   // 1. No ‘Access-Control-Allow-Origin’ Header
