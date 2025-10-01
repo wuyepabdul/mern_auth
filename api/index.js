@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { corsMiddleware } from "./middleware/corsMiddleWar.js";
 
 dotenv.config();
 const app = express();
@@ -13,15 +14,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to MERN Advanced Auth API at ");
 });
 
-const corsConfig = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
+// const corsConfig = {
+//   origin: [process.env.CLIENT_URL_LOCAL,process.env.CLIENT_URL_PRODUCTION],
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+// };
 
-app.use(cors(corsConfig));
-
-app.options("", cors(corsConfig));
+// app.use(cors(corsConfig));
+app.use(corsMiddleware);
+// app.options("", cors(corsConfig));
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
