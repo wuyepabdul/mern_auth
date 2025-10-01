@@ -19,7 +19,7 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   });
 
   const mailOptions = {
-    from: "duls-tech@server.com",
+    from: '"MERN-AUTH" <dulstech@egmail.com>',
     to: receiver.email,
     subject: emailSubject,
     text: emailSubject, // plain‑text body
