@@ -10,26 +10,26 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
-  res.send("Welcome to MERN Advanced Auth API at ");
+  res.send("Welcome to MERN Advanced Auth API at : ", process.env.CLIENT_URL);
 });
 
 const corsConfig = {
-  origin: [process.env.CLIENT_URL_LOCAL, process.env.CLIENT_URL_PRODUCTION],
+  origin: process.env.CLIENT_URL,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
 };
 
 app.use(cors(corsConfig));
-app.options("", cors(corsConfig));
+// app.options("", cors(corsConfig));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  console.log("CORS headers applied for:", req.method, req.path);
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   console.log("CORS headers applied for:", req.method, req.path);
+//   next();
+// });
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
