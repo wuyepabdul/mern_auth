@@ -6,15 +6,12 @@ import {
   welcomeTemplate,
 } from "./emailTemplates.js";
 
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   const transporter = nodemailer.createTransport({
+    service: "gmail",
     host: "smtp.gmail.com",
-    secure: true,
-    port: 465,
+    secure: false,
+    port: 587,
     auth: {
       user: process.env.NODEMAILER_EMAIL,
       pass: process.env.NODEMAILER_PASSWORD,
@@ -22,7 +19,7 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   });
 
   const mailOptions = {
-    from: `"MERN-AUTH"  <${process.env.NODEMAILER_EMAIL}>`,
+    from: '"MERN-AUTH" <dulstech@gmail.com>',
     to: receiver.email,
     subject: emailSubject,
     text: emailSubject, // plain‑text body
