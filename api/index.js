@@ -19,7 +19,7 @@ const corsConfig = {
 };
 
 app.use(cors(corsConfig));
-app.options("*", cors(corsConfig));
+// app.options("*", cors(corsConfig));
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
