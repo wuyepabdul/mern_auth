@@ -18,8 +18,25 @@ const corsConfig = {
   credentials: true,
 };
 
-app.use(cors(corsConfig));
-// app.options("*", cors(corsConfig));
+const allowedOrigins = [process.env.CLIENT_URL];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  console.log("Origin:", req.headers.origin);
+  next();
+});
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
