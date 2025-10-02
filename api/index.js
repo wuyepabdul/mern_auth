@@ -16,11 +16,10 @@ app.get("/", (req, res) => {
 const corsConfig = {
   origin: process.env.CLIENT_URL,
   credentials: true,
-  methods: ["GET", "POST", "OPTIONS"],
 };
 
 app.use(cors(corsConfig));
-app.options("", cors(corsConfig));
+app.options("*", cors(corsConfig));
 
 app.use(express.json()); // allows us to parse incoming requests from req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
