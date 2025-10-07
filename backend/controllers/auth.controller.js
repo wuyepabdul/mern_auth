@@ -2,7 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
-import { sendEmail } from "../utils/brevoSmtp.js";
+import { sendEmail } from "../utils/resend.js";
 import crypto from "crypto";
 import dotenv from "dotenv";
 dotenv.config();
