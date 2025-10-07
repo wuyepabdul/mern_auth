@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 const corsConfig = {
   origin: [process.env.CLIENT_URL],
   credentials: true,
-  method: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
 };
 app.options(/^\/.*/, cors(corsConfig));
 app.use(cors(corsConfig));
@@ -43,6 +43,10 @@ app.use("/api/auth", authRoutes);
 
 connectDb();
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+// ✅ Only listen locally, export for Vercel
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => console.log(`Server running on port ${port}`));
+}
+
+export default app;
+
