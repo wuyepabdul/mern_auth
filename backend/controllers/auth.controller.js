@@ -39,7 +39,7 @@ export const signup = async (req, res) => {
     generateTokenAndSetCookie(res, newUser._id);
     sendEmail(newUser, "verify", "Verify Account", clientUrl);
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "User Created Successfully",
       user: { ...newUser._doc, password: undefined },
