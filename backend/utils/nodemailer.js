@@ -16,7 +16,7 @@ export const sendEmail = (receiver, emailTemplate, emailSubject, clientUrl) => {
   });
 
   const mailOptions = {
-    from: '"MERN-AUTH" <dulstech@gmail.com>',
+    from: '"MERN-AUTH" <wuyepabdul@gmail.com>',
     to: receiver.email,
     subject: emailSubject,
     text: emailSubject, // plain‑text body
